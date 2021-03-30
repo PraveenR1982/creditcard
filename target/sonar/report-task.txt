@@ -1,0 +1,6 @@
+projectKey=com.kushal:creditcard
+serverUrl=http://localhost:9000
+serverVersion=7.9.5.38598
+dashboardUrl=http://localhost:9000/dashboard?id=com.kushal%3Acreditcard
+ceTaskId=AXdb5uhoSshuekPcIqpB
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXdb5uhoSshuekPcIqpB

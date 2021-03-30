@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    
+    <mvc:annotation-driven />
+    
+    <context:component-scan base-package="creditcard" />
+    	
+    <bean id="eligibilitydao" class="creditcard.Eligibilitydao">  
+    	<property name="template" ref="template"></property>  
+    </bean> 
+    	
+     <bean id="template" class="org.springframework.orm.hibernate4.HibernateTemplate">  
+    	<property name="sessionFactory" ref="mysessionFactory"></property>  
+    	<property name="checkWriteOperations" value="false"></property>
+    </bean>   
+      
+    <bean id="mysessionFactory"  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSourc"></property>  
+          
+        <property name="mappingLocations">  
+        <list>  
+        <value>eligibility.hbm.xml</value>  
+        </list>  
+        </property>  
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>  
+                <prop key="hibernate.hbm2ddl.auto">create</prop>  
+                <prop key="hibernate.show_sql">true</prop>  
+                  
+            </props>  
+        </property>  
+    </bean>  
+     <bean id="dataSourc" class="org.apache.commons.dbcp.BasicDataSource">  
+        <property name="driverClassName"  value="org.hsqldb.jdbcDriver"></property>  
+        <property name="url" value="jdbc:hsqldb:mem:ccvalidato"></property>  
+        <property name="username" value="sa"></property>  
+        <property name="password" value=""></property>  
+    </bean> 
+     <jdbc:initialize-database data-source="dataSourc" ignore-failures="DROPS" >
+        <jdbc:script location="data.sql" />
+    </jdbc:initialize-database>
+</beans>

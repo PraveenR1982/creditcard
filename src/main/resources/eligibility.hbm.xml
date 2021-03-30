@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+<class name="creditcard.Eligibility" table="EligibilityTable">  
+	          <id name="panno"></id>  
+	          <property name="score"></property>  
+	</class>  
+</hibernate-mapping>
